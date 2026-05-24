@@ -10,6 +10,7 @@ import java.util.Random;
 import java.io.IOException;
 import org.json.JSONObject;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class Message {
     
@@ -19,6 +20,8 @@ public class Message {
     private String messageText;
     private String messageHash;
     
+    private static int totalMessages = 0;
+    
     public Message(int messageNumber, String recipient, String messageText){
         this.messageNumber = messageNumber;
         this.recipient = recipient;
@@ -26,6 +29,27 @@ public class Message {
         this.messageID = generateMessageID();
         this.messageHash = createMessageHash();
     }
+    
+    public String getMessageID(){
+        return messageID;
+    }
+    
+    public String getMessageHash(){
+        return messageHash;
+    }
+    
+    public String getRecipient(){
+        return recipient;
+    }
+    
+    public String getMessageText(){
+        return messageText;
+    }
+    
+    public int getMessageNumber(){
+        return messageNumber;
+    }
+    
     private String generateMessageID(){
         
         Random random = new Random();
@@ -57,11 +81,22 @@ public class Message {
         }
     }
     
+    public String printMessage(){
+        return  "Message ID: " + messageID + "\n" +
+                "Message Hash: " + messageHash + "\n" +
+                "Recipient: " + recipient + "\n" +
+                "Message: " + messageText;
+    }
+    
+    public int returnTotalMessage(){
+        return totalMessages;
+    }
+    
     public String createMessageHash(){
         
         String idPart = messageID.substring(0, 2);
         
-        String[] words = messageText.trim().split(" ");
+        String[] words = messageText.trim().split("\\s+");
         
         String firstWord = words[0];
         String lastWord = words[words.length - 1];
@@ -71,32 +106,30 @@ public class Message {
     }
     
     public String sentMessage(){
+        Scanner input = new Scanner(System.in);
        
         System.out.println("What would you like to do with this message?");
         System.out.println("1.) Send Message");
         System.out.println("2.) Disregard Message");
         System.out.println("3.) Store message to send later");
         
-        int choice = 0;
+        int choice = input.nextInt();
         
         switch (choice){
             case 1:
-                
-                System.out.println("Message ID: " + messageID);
-                System.out.println("Message Hash: " + messageHash);
-                System.out.println("Recipient: " + recipient);
-                System.out.println("Message: " + messageText);
-                return ("Message succesfully sent.");
+                totalMessages++;
+                return "Message succesfully sent.";
             
             case 2:
-                return ("Press 0 to delete the message.");
+                return "Press 0 to delete the message.";
                 
             case 3:
                 storeMessage();
-                return ("Message successfully stored.");
+                System.out.println("Message saved to messages.json.");
+                return "Message successfully stored.";
                
             default:
-                return ("Invalid option.");
+                return "Invalid option. Please choose option 1, 2 or 3.";
         }
     }
     
@@ -112,7 +145,7 @@ public class Message {
             file.write(json.toString() + " ");
             file.flush();
         } catch (IOException e){
-            System.out.println("Erro saving message: " + e.getMessage());
+            System.out.println("Error saving message: " + e.getMessage());
         }
     }
 }
