@@ -50,7 +50,7 @@ public class Message {
         return messageNumber;
     }
     
-    private String generateMessageID(){
+    String generateMessageID(){
         
         Random random = new Random();
         long id = 1000000000L + (long)(random.nextDouble() * 9000000000L);

@@ -22,6 +22,8 @@ public class Login {
     String username;
     String password;
     String phoneNumber;
+    String firstName;
+    String lastName;
     
     /* To check the if user's username is valid, 
     it must contain and underscore ("_") 
