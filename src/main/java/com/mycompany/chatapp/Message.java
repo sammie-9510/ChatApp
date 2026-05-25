@@ -13,7 +13,7 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Message {
-    
+    //These are the objects declared to call upon
     private String messageID;
     private int messageNumber;
     private String recipient;
@@ -49,7 +49,7 @@ public class Message {
     public int getMessageNumber(){
         return messageNumber;
     }
-    
+    //This is for generatind the message id that must be no longer than 10 characters
     String generateMessageID(){
         
         Random random = new Random();
@@ -61,7 +61,7 @@ public class Message {
         
         return messageID.length() == 10;
     }
-    
+    //THis for to check the correct way the recipient cell phone should be formatted
     public String checkRecipientCell(){
         
         if (recipient.startsWith("+27") && recipient.length() <=12){
@@ -70,7 +70,7 @@ public class Message {
             return ("Cell phone number is incorrectly formatted or does not contain and international code. Please correct the number and try again.");
         }
     }
-    
+    //This is to check if message legth of the message os going to send it is not longer than 250 characters
     public String checkMessageLength(){
         
         if (messageText.length() <= 250){
@@ -80,7 +80,8 @@ public class Message {
             return ("Message exceeds 250 characters by " + over + "; please reduce the size.");
         }
     }
-    
+    //this is for after the user as send their it wil print the messages details which is the message id, meaasge hash
+    // recpient number and the message the user wrote
     public String printMessage(){
         return  "Message ID: " + messageID + "\n" +
                 "Message Hash: " + messageHash + "\n" +
@@ -91,7 +92,7 @@ public class Message {
     public int returnTotalMessage(){
         return totalMessages;
     }
-    
+    //This is to generate the message hash, which must be uppercase and have the first word and last word of the message
     public String createMessageHash(){
         
         String idPart = messageID.substring(0, 2);
@@ -104,7 +105,7 @@ public class Message {
         String hash = idPart + ":" + messageNumber + ":" + firstWord + lastWord;
         return hash.toUpperCase();
     }
-    
+    //This is to prompted the user to choose either to send the message, disregard the message or store it
     public String sentMessage(){
         Scanner input = new Scanner(System.in);
        
@@ -132,7 +133,10 @@ public class Message {
                 return "Invalid option. Please choose option 1, 2 or 3.";
         }
     }
-    
+    //This is whwere th message is stored in JSON object
+    /* JSON library used :org.json
+    source: https://mvnrespository.com/artifact/org.json/json
+    */
     public void storeMessage(){
         JSONObject json = new JSONObject();
         json.put("messageID", this.messageID);

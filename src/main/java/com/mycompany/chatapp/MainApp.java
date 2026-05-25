@@ -38,6 +38,10 @@ public class MainApp {
         System.out.println("Enter your last name: ");
         String lastName = input.nextLine();
         
+        /* we prompt the user to enter their first name last name and 
+        create a password and user name but we guide them to what is required until 
+        registion is successful
+        */
         String username;
         
         while (true){
@@ -93,7 +97,8 @@ public class MainApp {
         
         /*If registration is successful and complete
         the user may now login by entering their username and 
-        writing their password to login successfully
+        writing their password to login successfully, the user is given 3 attempts to successfully
+        login or the code with end
         */
         System.out.println("\n=== User Login === ");
         
@@ -127,7 +132,10 @@ public class MainApp {
             
             System.out.println("\nWELCOME TO QIUCKCHAT.");
         }
-    
+        
+    /* When sucessully logined in the user with head to th main menu where the user is askes to send messages
+        check messages send or quit the app and the user ptompted to choose which option
+        */
         if (loggedIn){
          
            boolean running = true;
@@ -147,7 +155,11 @@ public class MainApp {
             input.nextLine();
             
             Message message = null;
-            
+            /* we loop the code so when the user chooese an option the code will know what to do
+            we used switch cases for this, fisrt case is for whem the user chooses to sent messages
+            the users asked how man messages they sent , the  recipeint number and the code will deplay
+            a message hash and message id number with the user message and recipients number
+            */
             switch (choice){
                 case 1:
                     System.out.println("\nHow many messages would you like to send?");
@@ -209,19 +221,19 @@ public class MainApp {
                             System.out.println("--------------------------------------");
                         }   
                         break;    
-                case 2:
+                case 2: // this case is for option which only says coming soon as we not required yet to do
                     System.out.println("\nComing Soon.");
                     break;
-                case 3:
+                case 3: // this case is for when the user chooses option to exit the app but quiting
                     running = false;
                     System.out.println("\nGoodbye, Thank you for using QuickChat!");
                     break;   
-                default:
+                default: // the defailt is added in case the user chooses and invalid option and will be told to choose the correct options
                     System.out.println("\n Invalid choice. Please select 1, 2, or 3.");
             }
         }
           
-    } else {
+    } else { //this is for when the user has unsuccessfully logged in
             System.out.println("Login was unsuccessful, please try again.");
         }
     }

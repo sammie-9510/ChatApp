@@ -25,13 +25,13 @@ public class MessageTest {
         //Test data message1
         //Message number: 1
         //Recipient: +27718693002
-        //Message: "Hi, Mike, can youjoin us for dinner tonight?"
+        //Message: "Hi, Mike, can you join us for dinner tonight?"
         message1 = new Message(1, "+27718693002", "Hi Mike, can you join us for dinner tonight");
         
         //Test data message 2:
         //Message number: 2
         //Recipient: 08575975889 (invalid number has no country code)
-        //Message: Hi Keegen, did you receive the payment?"
+        //Message: Hi Keegen, did you receive the package?"
         message2 = new Message(2, "08575975889", "Hi Keegan, did you receive the package?");
     }
     
