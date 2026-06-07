@@ -11,8 +11,19 @@ import java.io.IOException;
 import org.json.JSONObject;
 import java.io.FileWriter;
 import java.util.Scanner;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Message {
+    
+    private static List<String> sentMessagas = new ArrayList<>();
+    private static List<String> disregardedMessages = new ArrayList<>();
+    private static List<String> storedMessages = new ArrayList<>();
+    private static List<String> messageHashes = new ArrayList<>();
+    private static List<String> messageIDs = new ArrayList<>();
+    private static List<String> recipientList = new ArrayList<>();
+    
     //These are the objects declared to call upon
     private String messageID;
     private int messageNumber;
@@ -49,6 +60,8 @@ public class Message {
     public int getMessageNumber(){
         return messageNumber;
     }
+    
+    
     //This is for generatind the message id that must be no longer than 10 characters
     String generateMessageID(){
         
