@@ -165,5 +165,17 @@ public class Message {
             System.out.println("Error saving message: " + e.getMessage());
         }
     }
+    
+    public static String displayLongestMessage(){
+        String longest = "";
+        for(String message : storedMessages){
+            if(message.length() > longest.length()){
+                longest = message;
+            }
+        }
+        return longest;
+    }
+    
+   
 }
 
