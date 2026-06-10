@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Message {
     
-    private static List<String> sentMessagas = new ArrayList<>();
+    private static List<String> sentMessages = new ArrayList<>();
     private static List<String> disregardedMessages = new ArrayList<>();
     private static List<String> storedMessages = new ArrayList<>();
     private static List<String> messageHashes = new ArrayList<>();
@@ -176,6 +176,15 @@ public class Message {
         return longest;
     }
     
+   public static String searchByMessageID(String ID){
+       for(int i = 0; i < messageIDs.size(); i++){
+           if(messageIDs.get(i).equals(ID)){
+               return sentMessages.get(i);
+           }
+       }
+       return "Message not found.";
+   }
+   
    
 }
 
