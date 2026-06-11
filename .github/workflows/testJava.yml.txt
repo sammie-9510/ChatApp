@@ -5,6 +5,7 @@ on:
     branches:
         - main
         - Part2-SendMessages
+        - Part3-Array
     pull_request:
       branches:
         - main
