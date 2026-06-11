@@ -6,6 +6,7 @@ package com.mycompany.chatapp;
 /** In this part 2 of the POE we will be creating code for the user 
  * to send messages after successfully registered to the app
  */
+import java.io.BufferedReader;
 import java.util.Random;
 import java.io.IOException;
 import org.json.JSONObject;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class Message {
     
-    private static List<String> sentMessagas = new ArrayList<>();
+    private static List<String> sentMessages = new ArrayList<>();
     private static List<String> disregardedMessages = new ArrayList<>();
     private static List<String> storedMessages = new ArrayList<>();
     private static List<String> messageHashes = new ArrayList<>();
@@ -176,6 +177,104 @@ public class Message {
         return longest;
     }
     
+   public static String searchByMessageID(String ID){
+       for(int i = 0; i < messageIDs.size(); i++){
+           if(messageIDs.get(i).equals(ID)){
+               return sentMessages.get(i);
+           }
+       }
+       return "Message not found.";
+   }
    
+   public static String searchByRecipient(String recipient){
+       StringBuilder results = new StringBuilder();
+       for(int i = 0; i < recipientList.size(); i++){
+           if (recipientList.get(i).equals(recipient)){
+               results.append(sentMessages.get(i)).append("\n");
+           }
+   }
+       return results.toString();
+   }
+   
+   public static String deleteByHash(String Hash){
+       for(int i = 0; i < messageHashes.size(); i++){
+           if(messageHashes.get(i).equals(Hash)){
+               String deleteMessage = sentMessages.get(i);
+               
+               messageHashes.remove(i);
+               messageIDs.remove(i);
+               recipientList.remove(i);
+               sentMessages.remove(i);
+               
+               return "Message: " + deleteMessage + " successfully deleted.";
+           }
+       }
+       
+       return "Hash not found.";
+   }
+   
+   /* JSON library used :org.json
+    source: https://mvnrespository.com/artifact/org.json/json
+    */
+   public static void loadStoredMessages(){
+       try(BufferedReader reader = new BufferedReader(new FileReader("messages.json"))){
+           String line;
+           
+           while((line = reader.readLine()) != null){
+           JSONObject object = new JSONObject(line);
+           storedMessages.add(object.getString("messageText"));
+       }
+       } catch (IOException e){
+           System.out.println("No stored messages found.");
+       }
+   }
+   
+   public static String printMessages(){
+       StringBuilder report = new StringBuilder();
+       
+       report.append("======= MESSAGE REPORT ========\n");
+       for(int i = 0; i < sentMessages.size(); i++){
+           report.append("---------------------------------\n");
+           report.append("Hash: ").append(messageHashes.get(i)).append("\n");
+           report.append("Recipient: ").append(recipientList.get(i)).append("\n");
+           report.append("Message: ").append(sentMessages.get(i)).append("\n");
+       }
+       
+       return report.toString();
+   }
+   
+   public static String displayStoredMessages(){
+       StringBuilder result = new StringBuilder();
+       
+       for(String message : storedMessages){
+           result.append(message).append("\n");
+       }
+       
+       return result.toString();
+   }
+   
+   public static List<String> getSentMessages(){
+       return sentMessages;
+   }
+   
+   public static List<String> getDisregardedMessages(){
+       return disregardedMessages;
+   }
+   
+   public static List<String> getStoredMessages(){
+       return storedMessages;
+   }
+   
+   public static List<String> getMessageHashes(){
+       return messageHashes;
+   }
+   
+   public static List<String> getMessageIDs(){
+       return messageIDs;
+   }
+   
+   public static List<String> getReciptentList(){
+       return recipientList;
+   }
 }
 
