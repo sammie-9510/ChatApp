@@ -1,0 +1,15 @@
+Chat Application Part 3
+---
+
+NAME: Esamisipho Ndiko
+Student Number: ST10531476
+Module: PROG5121
+---
+
+In Part 3, the ChatApp was upgraded to track information like sent, skipped, and saved messages, 
+as well as unique message IDs and security codes (hashes), using five internal lists. 
+The app now automatically loads previously saved messages from a JSON file.
+A new "Stored Messages" option was also added to the main menu, allowing users to view all saved messages, 
+find the longest one, search by ID or phone number, delete a message using its hash, or pull up a full report of all sent data. 
+Finally, six new tests were written to ensure these search and list features work perfectly. 
+The entire app was tested from start to finish, and everything runs smoothly and passes all automatic checks on GitHub.
