@@ -279,7 +279,7 @@ public class Message {
        return messageIDs;
    }
    
-   public static List<String> getReciptentList(){
+   public static List<String> getRecipientList(){
        return recipientList;
    }
 }
