@@ -148,6 +148,7 @@ public class MainApp {
                  System.out.println("1.) Send Messages");
                  System.out.println("2.) Show recently sent messages");
                  System.out.println("3.) Quit");
+                 System.out.println("4.) Stored Messages.");
                  System.out.println("===========================");
                  System.out.println("Enter your choice: ");
             
@@ -227,7 +228,10 @@ public class MainApp {
                 case 3: // this case is for when the user chooses option to exit the app but quiting
                     running = false;
                     System.out.println("\nGoodbye, Thank you for using QuickChat!");
-                    break;   
+                    break; 
+                case 4:
+                    storedMessagesMenu();
+                    break;
                 default: // the defailt is added in case the user chooses and invalid option and will be told to choose the correct options
                     System.out.println("\n Invalid choice. Please select 1, 2, or 3.");
             }
@@ -236,6 +240,59 @@ public class MainApp {
     } else { //this is for when the user has unsuccessfully logged in
             System.out.println("Login was unsuccessful, please try again.");
         }
+    }
+    
+    public static void storedMessagesMenu(){
+        Scanner scanner = new Scanner(System.in);
+        
+        char choice;
+        
+        do{
+            System.out.println("\n==== STORED MESSAGE MENU ====");
+            System.out.println("a) Display the sender and recipient of all stored message.");
+            System.out.println("b) Display the longest stored message.");
+            System.out.println("c) Search for a message ID and display the corresponding recipient and message.");
+            System.out.println("d) Search for all the messages stored fpr a particular recipient.");
+            System.out.println("e) Delete a message using the messsage hash.");
+            System.out.println("f) Display a report that lists the full details of all the sent messages.");
+            System.out.println("g) Go back to the main menu.");
+            
+            choice = scanner.nextLine().toLowerCase().charAt(0);
+            switch(choice){
+                case 'a':
+                    System.out.println(Message.displayStoredMessages());
+                    break;
+                case 'b':
+                    System.out.println(Message.displayLongestMessage());
+                    break;
+                case 'c':
+                    System.out.println("Enter message ID: ");
+                    String ID = scanner.nextLine();
+                    
+                    System.out.println(Message.searchByMessageID(ID));
+                    break;
+                case 'd':
+                    System.out.println("Enter recipient number: ");
+                    String recipient = scanner.nextLine();
+                    
+                    System.out.println(Message.searchByRecipient(recipient));
+                    break;
+                case 'e':
+                    System.out.println("Enter message hash: ");
+                    String Hash = scanner.nextLine();
+                    
+                    System.out.println(Message.deleteByHash(Hash));
+                    break;
+                case 'f':
+                    System.out.println(Message.printMessages());
+                    break;
+                case 'g':
+                    System.out.println("Return to the main menu");
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
+        } while (choice != 'g');
     }
 }
 
