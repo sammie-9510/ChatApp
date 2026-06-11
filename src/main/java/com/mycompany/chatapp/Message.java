@@ -132,16 +132,22 @@ public class Message {
         
         switch (choice){
             case 1:
-                totalMessages++;
+                sentMessages.add(this.messageText);
+                messageHashes.add(this.messageHash);
+                messageIDs.add(this.messageID);
+                recipientList.add(this.recipient);
                 return "Message succesfully sent.";
             
             case 2:
-                return "Press 0 to delete the message.";
+                storeMessage();
+                messageHashes.add(this.messageHash);
+                messageIDs.add(this.messageID);
+                recipientList.add(this.recipient);
+                return "Message successfully stored.";
                 
             case 3:
-                storeMessage();
-                System.out.println("Message saved to messages.json.");
-                return "Message successfully stored.";
+                disregardedMessages.add(this.messageText);
+                return "Press 0 to delete the message.";
                
             default:
                 return "Invalid option. Please choose option 1, 2 or 3.";
